@@ -1,8 +1,21 @@
+import React from "react";
+import Content from "./components/Content";
+import Container from "@mui/material/Container";
+import Header from "./components/Header";
+import "./components/style/App.css";
+import Signup from "./components/Signup";
+import { AuthProvider } from "./contexts/AuthContext";
 function App() {
   return (
-    <div className="App">
-      <h1>Nanny Share App</h1>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Container maxWidth="lg" className="container">
+          <Header />
+          <Content />
+          <Signup />
+        </Container>
+      </div>
+    </AuthProvider>
   );
 }
 
