@@ -1,5 +1,12 @@
 import React, { useRef, useState } from "react";
-import { Card, Grid, TextField, Button, CardContent } from "@mui/material/";
+import {
+  Card,
+  Grid,
+  TextField,
+  Button,
+  CardContent,
+  Alert,
+} from "@mui/material/";
 
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../contexts/AuthContext";
@@ -35,46 +42,50 @@ function Signup() {
           <Typography variant="h4" component="div">
             Sign Up
           </Typography>
-          <Grid container direction="column">
-            <Grid sx={{ mt: 2 }} item>
-              <TextField
-                variant="outlined"
-                fullWidth
-                margin="dense"
-                label="Email"
-                inputRef={emailRef}
-                required
-                placeholder="Email"
-              />
-              <TextField
-                fullWidth
-                margin="dense"
-                label="Password"
-                type="password"
-                inputRef={passwordRef}
-                placeholder="password"
-                autoComplete="current-password"
-                variant="outlined"
-              />
-              <TextField
-                fullWidth
-                margin="dense"
-                id="outlined-password-input"
-                label="Password Confirmation"
-                type="password"
-                autoComplete="current-password"
-                inputRef={passwordConfirmRef}
-              />
-              <Button
-                sx={{ mt: 1 }}
-                fullWidth
-                variant="contained"
-                type="submit"
-              >
-                Sign Up
-              </Button>
+          {error && <Alert severity="warning">{error}</Alert>}
+          <form onSubmit={handleSubmit}>
+            <Grid container direction="column">
+              <Grid sx={{ mt: 2 }} item>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  margin="dense"
+                  label="Email"
+                  inputRef={emailRef}
+                  required
+                  placeholder="Email"
+                />
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  label="Password"
+                  type="password"
+                  inputRef={passwordRef}
+                  placeholder="password"
+                  autoComplete="current-password"
+                  variant="outlined"
+                />
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  id="outlined-password-input"
+                  label="Password Confirmation"
+                  type="password"
+                  autoComplete="current-password"
+                  inputRef={passwordConfirmRef}
+                />
+                <Button
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  variant="contained"
+                  type="submit"
+                  disabled={loading}
+                >
+                  Sign Up
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          </form>
           <Typography sx={{ mt: 1.5 }}>
             Already have an account? Log In
           </Typography>
