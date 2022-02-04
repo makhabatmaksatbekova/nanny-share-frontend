@@ -1,12 +1,28 @@
 *{
     margin: 0 auto ;
     color: grey;
+    /* background-color: lightblue; */
+
+   
 
 }
-.container{
-    /* height: 100vh; */
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+    color: grey !important
+}
+.css-1q39md6-MuiButtonBase-root-MuiButton-root {
+
+    color: grey !important
+}
+
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
 }
 div{
     background-color: lightblue;
 }
 
+
+.container{
+    min-height: 100vh;
+}

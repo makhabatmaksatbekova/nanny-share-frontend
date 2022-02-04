@@ -2,11 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from "./components/Signup";
+import { AuthProvider } from "./contexts/AuthContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <AuthProvider>
+    <BrowserRouter>
+      <React.StrictMode>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Signup />} />
+        </Routes>
+      </React.StrictMode>
+    </BrowserRouter>
+  </AuthProvider>,
   document.getElementById("root")
 );
 
