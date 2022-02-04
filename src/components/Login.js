@@ -15,28 +15,24 @@ import "./style/Signup.css";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const history = useNavigate();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value);
       history("/dashboard");
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to sign in");
     }
     setLoading(false);
   }
@@ -49,7 +45,7 @@ function Signup() {
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">
-              Sign Up
+              Log In
             </Typography>
             {error && <Alert severity="warning">{error}</Alert>}
             <form onSubmit={handleSubmit}>
@@ -74,15 +70,7 @@ function Signup() {
                     autoComplete="current-password"
                     variant="outlined"
                   />
-                  <TextField
-                    fullWidth
-                    margin="dense"
-                    id="outlined-password-input"
-                    label="Password Confirmation"
-                    type="password"
-                    autoComplete="current-password"
-                    inputRef={passwordConfirmRef}
-                  />
+
                   <Button
                     sx={{ mt: 1 }}
                     fullWidth
@@ -90,13 +78,16 @@ function Signup() {
                     type="submit"
                     disabled={loading}
                   >
-                    Sign Up
+                    Log In
                   </Button>
                 </Grid>
               </Grid>
             </form>
+            <Typography sx={{ mt: 2 }}>
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </Typography>
             <Typography sx={{ mt: 1.5 }}>
-              Already have an account? <Link to="/login"> Log In</Link>
+              Need an account ?<Link to="/signup"> Sign Up</Link>
             </Typography>
           </CardContent>
         </Card>
@@ -105,4 +96,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;

@@ -15,28 +15,25 @@ import "./style/Signup.css";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+function ForgotPassword() {
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const history = useNavigate();
+  const { resetPassword } = useAuth();
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
     try {
       setError("");
+      setMessage("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history("/dashboard");
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your inbox for further instructions");
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to reset password");
     }
     setLoading(false);
   }
@@ -49,9 +46,10 @@ function Signup() {
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">
-              Sign Up
+              Forgot Password
             </Typography>
             {error && <Alert severity="warning">{error}</Alert>}
+            {message && <Alert severity="success">{message}</Alert>}
             <form onSubmit={handleSubmit}>
               <Grid container direction="column">
                 <Grid sx={{ mt: 2 }} item>
@@ -64,25 +62,7 @@ function Signup() {
                     required
                     placeholder="Email"
                   />
-                  <TextField
-                    fullWidth
-                    margin="dense"
-                    label="Password"
-                    type="password"
-                    inputRef={passwordRef}
-                    placeholder="password"
-                    autoComplete="current-password"
-                    variant="outlined"
-                  />
-                  <TextField
-                    fullWidth
-                    margin="dense"
-                    id="outlined-password-input"
-                    label="Password Confirmation"
-                    type="password"
-                    autoComplete="current-password"
-                    inputRef={passwordConfirmRef}
-                  />
+
                   <Button
                     sx={{ mt: 1 }}
                     fullWidth
@@ -90,13 +70,14 @@ function Signup() {
                     type="submit"
                     disabled={loading}
                   >
-                    Sign Up
+                    Reset Password
                   </Button>
                 </Grid>
               </Grid>
             </form>
+
             <Typography sx={{ mt: 1.5 }}>
-              Already have an account? <Link to="/login"> Log In</Link>
+              Need an account ?<Link to="/login"> Login</Link>
             </Typography>
           </CardContent>
         </Card>
@@ -105,4 +86,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default ForgotPassword;

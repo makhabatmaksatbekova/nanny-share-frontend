@@ -15,30 +15,41 @@ import "./style/Signup.css";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+function UpdateProfile() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const { currentUser, updatePassword, updateEmail } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (passwordConfirmRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history("/dashboard");
-    } catch {
-      setError("Failed to create an account");
+    setError("");
+
+    setLoading(true);
+
+    const promises = [];
+    if (emailRef.current.value !== currentUser.email) {
+      promises.push(updateEmail(emailRef.current.value));
     }
-    setLoading(false);
+    if (passwordRef.current.value !== currentUser.password) {
+      promises.push(updatePassword(passwordRef.current.value));
+    }
+    Promise.all(promises)
+      .then(() => {
+        history("/dashboard");
+      })
+      .catch(() => {
+        setError("Failed to update account");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -49,7 +60,7 @@ function Signup() {
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">
-              Sign Up
+              Update Profile
             </Typography>
             {error && <Alert severity="warning">{error}</Alert>}
             <form onSubmit={handleSubmit}>
@@ -59,10 +70,11 @@ function Signup() {
                     variant="outlined"
                     fullWidth
                     margin="dense"
-                    label="Email"
+                    label={currentUser.email}
                     inputRef={emailRef}
+                    defaultValue={currentUser.email}
                     required
-                    placeholder="Email"
+                    placeholder={currentUser.email}
                   />
                   <TextField
                     fullWidth
@@ -70,7 +82,7 @@ function Signup() {
                     label="Password"
                     type="password"
                     inputRef={passwordRef}
-                    placeholder="password"
+                    placeholder="Leave blank to keep the same"
                     autoComplete="current-password"
                     variant="outlined"
                   />
@@ -80,6 +92,7 @@ function Signup() {
                     id="outlined-password-input"
                     label="Password Confirmation"
                     type="password"
+                    placeholder="Leave blank to keep the same"
                     autoComplete="current-password"
                     inputRef={passwordConfirmRef}
                   />
@@ -90,13 +103,13 @@ function Signup() {
                     type="submit"
                     disabled={loading}
                   >
-                    Sign Up
+                    Update
                   </Button>
                 </Grid>
               </Grid>
             </form>
             <Typography sx={{ mt: 1.5 }}>
-              Already have an account? <Link to="/login"> Log In</Link>
+              <Link to="/dashboard"> Cancel</Link>
             </Typography>
           </CardContent>
         </Card>
@@ -105,4 +118,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default UpdateProfile;
