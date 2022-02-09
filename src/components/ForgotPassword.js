@@ -32,17 +32,23 @@ function ForgotPassword() {
       setLoading(true);
       await resetPassword(emailRef.current.value);
       setMessage("Check your inbox for further instructions");
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
     } catch {
       setError("Failed to reset password");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
     setLoading(false);
   }
 
   return (
     <div className="signup_container">
-      <Container maxWidth="lg">
-        <Header />
+      <Header />
 
+      <Container maxWidth="lg">
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">

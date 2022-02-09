@@ -1,0 +1,32 @@
+MuiBox-root {
+    min-height: 100vh;
+}
+
+.family_container{
+    border:solid 2px black;
+    border-style: dotted;
+    border-radius: 15px !important;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+
+    
+}
+.family_container:hover{
+    box-shadow: 2px 5px grey !important;
+}
+.family_img {
+    border-radius: 10px;
+    width:70px;
+    height:110px;
+}
+.list_all_family_age_rate{
+    font-size: medium;
+}
+.card_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}

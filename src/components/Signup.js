@@ -44,9 +44,7 @@ function Signup() {
   return (
     <div className="signup_container">
       <Container maxWidth="lg">
-        <Header />
-
-        <Card sx={{ maxWidth: 500, mt: 2 }}>
+        <Card sx={{ maxWidth: 500 }}>
           <CardContent>
             <Typography variant="h4" component="div">
               Sign Up

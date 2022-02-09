@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Card,
   Grid,
+  Box,
   TextField,
   Container,
   Button,
@@ -31,34 +32,36 @@ function Dashboard() {
   }
 
   return (
-    <Container className="dashboard_container">
+    <Box minHeight="100vh">
       <Header />
-      <Card sx={{ maxWidth: 500, mt: 2 }}>
-        <CardContent>
-          <Typography variant="h4" component="div">
-            Profile
-          </Typography>
-          <Typography variant="h6" component="div">
-            <strong>Email:</strong> {currentUser.email}
-          </Typography>
-          <Link to="/update-profile">
-            <Button sx={{ mt: 1 }} fullWidth variant="contained">
-              {" "}
-              Update Profile
+      <Container>
+        <Card sx={{ maxWidth: 500, mt: 2 }}>
+          <CardContent>
+            <Typography variant="h4" component="div">
+              Profile
+            </Typography>
+            <Typography variant="h6" component="div">
+              <strong>Email:</strong> {currentUser.email}
+            </Typography>
+            <Link to="/update-profile">
+              <Button sx={{ mt: 1 }} fullWidth variant="contained">
+                {" "}
+                Update Profile
+              </Button>
+            </Link>
+
+            {error && <Alert severity="warning">{error}</Alert>}
+
+            <Button sx={{ mt: 1 }} onClick={handleLogout}>
+              Log out
             </Button>
-          </Link>
-
-          {error && <Alert severity="warning">{error}</Alert>}
-
-          <Button sx={{ mt: 1 }} onClick={handleLogout}>
-            Log out
-          </Button>
-          <Typography sx={{ mt: 1 }}>
-            Need an account ?<Link to="/signup"> Sign Up</Link>
-          </Typography>
-        </CardContent>
-      </Card>
-    </Container>
+            <Typography sx={{ mt: 1 }}>
+              Need an account ?<Link to="/signup"> Sign Up</Link>
+            </Typography>
+          </CardContent>
+        </Card>
+      </Container>
+    </Box>
   );
 }
 

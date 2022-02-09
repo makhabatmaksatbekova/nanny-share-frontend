@@ -46,6 +46,9 @@ function UpdateProfile() {
       })
       .catch(() => {
         setError("Failed to update account");
+        setTimeout(() => {
+          setError("");
+        }, 3000);
       })
       .finally(() => {
         setLoading(false);
@@ -54,9 +57,9 @@ function UpdateProfile() {
 
   return (
     <div className="signup_container">
-      <Container maxWidth="lg">
-        <Header />
+      <Header />
 
+      <Container maxWidth="lg">
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">

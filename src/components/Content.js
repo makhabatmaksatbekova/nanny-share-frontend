@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
+import ListAllFamilies from "./ListAllFamilies";
 
 import "./style/Content.css";
 function Content() {
@@ -17,13 +18,13 @@ function Content() {
 
         <Box component="h2">How often do you need a nanny?</Box>
 
-        <Link to="/signup">
+        <Link to="/families">
           <Button variant="outlined">Part-time</Button>
         </Link>
-        <Link to="/signup">
+        <Link to="/families">
           <Button variant="outlined">Full-time</Button>
         </Link>
-        <Link to="/signup">
+        <Link to="/families">
           <Button variant="outlined">Not sure</Button>
         </Link>
       </Grid>
