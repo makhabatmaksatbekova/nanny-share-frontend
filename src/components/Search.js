@@ -9,7 +9,7 @@ const Search = () => {
   const handleSearchChange = (e) => {
     setZipCode(e.target.value);
   };
-
+  console.log("test");
   // const onTrigger = (zipCode) => {
   //   searchByZipcode(zipCode);
   // };
