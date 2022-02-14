@@ -1,36 +1,29 @@
-*{
-    margin: 0 auto ;
-    color: #1c2843;
-
+* {
+  margin: 0 auto;
+  color: #1c2843;
 }
-.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
- color: #1c2843 !important
 
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  color: #1c2843 !important;
 }
 .css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-    color: #1c2843 !important
-
+  color: #1c2843 !important;
 }
 .css-1q39md6-MuiButtonBase-root-MuiButton-root {
-
-    color:#1c2843  !important
+  color: #1c2843 !important;
 }
 
 a:-webkit-any-link {
-    cursor: pointer;
-    text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
 }
-div{
-
-    background-color: #ebebeb;
-
+div {
+  background-color: #f6f6f6;
+}
+.container {
+  padding: 0px !important;
 }
 
-
-.App{
-    min-height: 100vh;
-
-}
-.css-11lq3yg-MuiGrid-root{
-    margin-top: 10px
+.css-11lq3yg-MuiGrid-root {
+  margin-top: 10px;
 }

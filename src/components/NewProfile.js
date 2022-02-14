@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useCreateProfile from "./FamilyProfileHooks";
 import ProfilePicture from "./ProfilePicture";
 import Header from "./Header";
+import "./style/NewProfile.css";
 import {
   Card,
   Grid,
@@ -36,109 +37,132 @@ const NewProfile = () => {
           mt: 2,
         }}
       >
-        <Grid item xs={12} md={6}>
-          <ProfilePicture />
+        <Grid item xs={12} md={6} sx={{ mt: 2 }}>
+          <Grid sx={{ mt: 5 }}>
+            <ProfilePicture />
+          </Grid>
         </Grid>
-        <Grid item>
-          <Card sx={{ maxWidth: 550 }}>
-            <CardContent>
-              <Grid container direction="column" alignItems="center">
-                <Grid item sx={{ mb: 2 }}>
-                  <Typography variant="h4" component="div">
-                    Create profile
-                  </Typography>
-                </Grid>
+
+        <Grid
+          item
+          sx={{
+            maxWidth: 600,
+            boxShadow: "0px 0px 7px #1c2843 ",
+            padding: "30px",
+
+            background: "white",
+          }}
+        >
+          <Box component="form" onSubmit={handleProfileSubmit}>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              sx={{
+                background: "white",
+              }}
+            >
+              <Grid item sx={{ mb: 2 }}>
+                <Typography
+                  variant="h4"
+                  component="div"
+                  sx={{
+                    background: "white",
+                  }}
+                >
+                  Create Profile
+                </Typography>
               </Grid>
 
-              <Box component="form" onSubmit={handleProfileSubmit}>
-                <Grid
-                  container
-                  direction="column"
-                  alignItems="center"
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
+              <Grid xs={8} item className="form_container">
+                <TextField
+                  name="familyName"
+                  label="Family name"
+                  onChange={handleInputChange}
+                  value={inputs.familyName}
+                  variant="filled"
+                  fullWidth
+                  required
+                />
+                <TextField
+                  name="address"
+                  label="address (city, state, zip_code)"
+                  onChange={handleInputChange}
+                  value={inputs.address}
+                  fullWidth
+                  required
+                  variant="filled"
+                />
+                {/* <TextField
+                  name="state"
+                  label="state"
+                  onChange={handleInputChange}
+                  value={inputs.state}
+                  fullWidth
+                  required
+                  variant="filled"
+                />
+                <TextField
+                  name="zip_code"
+                  label="zip_code"
+                  onChange={handleInputChange}
+                  value={inputs.zip_code}
+                  required
+                  variant="filled"
+                  fullWidth
+                /> */}
+                <TextField
+                  name="rate"
+                  label="rate"
+                  fullWidth
+                  onChange={handleInputChange}
+                  variant="filled"
+                  value={inputs.rate}
+                  required
+                />
+                <TextField
+                  name="age"
+                  label="child age"
+                  type="text"
+                  onChange={handleInputChange}
+                  value={inputs.age}
+                  variant="filled"
+                  fullWidth
+                  required
+                />
+                <TextField
+                  label="Responsibilities"
+                  name="responsibilities"
+                  variant="filled"
+                  multiline
+                  rows={4}
+                  onChange={handleInputChange}
+                  fullWidth
+                  value={inputs.responsibilities}
+                />
+                <TextField
+                  name="about"
+                  label="Little bit about me"
+                  type="text"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  onChange={handleInputChange}
+                  value={inputs.about}
+                  variant="filled"
+                  required
+                />
+                <Button
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  variant="contained"
+                  type="submit"
                 >
-                  <Grid xs={8} item>
-                    <TextField
-                      name="familyName"
-                      label="Family name"
-                      onChange={handleInputChange}
-                      value={inputs.familyName}
-                      variant="outlined"
-                      fullWidth
-                      required
-                    />
-                    <TextField
-                      name="location"
-                      label="Location"
-                      onChange={handleInputChange}
-                      value={inputs.location}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
-                    <TextField
-                      name="email"
-                      label="Email Address"
-                      type="email"
-                      onChange={handleInputChange}
-                      value={inputs.email}
-                      required
-                      variant="outlined"
-                      fullWidth
-                    />
-                    <TextField
-                      name="rate"
-                      label="rate"
-                      fullWidth
-                      onChange={handleInputChange}
-                      variant="outlined"
-                      value={inputs.rate}
-                      required
-                    />
-                    <TextField
-                      name="age"
-                      label="age"
-                      type="number"
-                      onChange={handleInputChange}
-                      value={inputs.age}
-                      variant="outlined"
-                      fullWidth
-                      required
-                    />
-                    <TextField
-                      label="Responsibilities"
-                      multiline
-                      name="responsibilities"
-                      variant="outlined"
-                      onChange={handleInputChange}
-                      fullWidth
-                      value={inputs.responsibilities}
-                    />
-                    <TextField
-                      name="about"
-                      label="Little bit about you"
-                      type="text"
-                      rows={4}
-                      fullWidth
-                      onChange={handleInputChange}
-                      value={inputs.about}
-                      variant="outlined"
-                      required
-                    />
-                    <Button
-                      sx={{ mt: 1 }}
-                      fullWidth
-                      variant="contained"
-                      type="submit"
-                      endIcon={<SendIcon />}
-                    >
-                      CREATE
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Box>
-            </CardContent>
-          </Card>
+                  CREATE
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
         </Grid>
       </Grid>
     </Box>

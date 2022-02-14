@@ -1,32 +1,33 @@
-MuiBox-root {
-    min-height: 100vh;
-}
+/* .MuiBox-root {
+  min-height: 100vh;
+} */
 
-.family_container{
-    border:solid 2px black;
-    border-style: dotted;
-    border-radius: 15px !important;
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer;
-
-    
+.family_container {
+  border: solid 1px wheat;
+  border-style: solid;
+  /* border-radius: 15px !important; */
+  box-shadow: 1px 3px 5px grey !important;
+  padding: 5px;
+  padding-bottom: 15px;
+  margin: 10px;
+  cursor: pointer;
+  /* background-color: aqua !important; */
 }
-.family_container:hover{
-    box-shadow: 2px 5px grey !important;
+.family_container:hover {
+  box-shadow: 2px 5px 10px grey !important;
+  transition: 0.3s;
 }
 .family_img {
-    border-radius: 10px;
-    width:70px;
-    height:110px;
+  border-radius: 10px;
+  width: 70px;
+  height: 110px;
 }
-.list_all_family_age_rate{
-    font-size: medium;
+.list_all_family_age_rate {
+  font-size: medium;
 }
-.card_content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+.card_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

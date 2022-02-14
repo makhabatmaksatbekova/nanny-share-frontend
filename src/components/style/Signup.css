@@ -1,3 +1,13 @@
-.signup_container{
-    min-height: 100vh;
+.signup_container {
+  min-height: 100vh;
+  border: 1px solid;
+}
+.signup_box > div {
+  background: white;
+}
+.signup_box * div {
+  background: white;
+}
+.signup_form * input {
+  background: white;
 }

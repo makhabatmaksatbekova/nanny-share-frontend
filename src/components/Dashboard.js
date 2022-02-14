@@ -38,7 +38,7 @@ function Dashboard() {
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">
-              Profile
+              Account
             </Typography>
             <Typography variant="h6" component="div">
               <strong>Email:</strong> {currentUser.email}
@@ -46,7 +46,7 @@ function Dashboard() {
             <Link to="/update-profile">
               <Button sx={{ mt: 1 }} fullWidth variant="contained">
                 {" "}
-                Update Profile
+                Edit Account
               </Button>
             </Link>
 

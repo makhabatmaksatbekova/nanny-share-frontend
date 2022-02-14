@@ -10,6 +10,7 @@ import {
 
 import Typography from "@mui/material/Typography";
 import Header from "./Header";
+
 import Container from "@mui/material/Container";
 import "./style/Signup.css";
 import { useAuth } from "../contexts/AuthContext";
@@ -48,9 +49,22 @@ function Login() {
           <Box sx={{ flex: 3 }}>
             <img src="https://static.wixstatic.com/media/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.jpeg/v1/fill/w_1259,h_1051,al_c,q_85,usm_0.66_1.00_0.01/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.webp" />
           </Box>
-          <Box sx={{ flex: 2, mt: 5 }}>
+          <Box
+            className="login_box"
+            sx={{
+              flex: 2,
+              paddingTop: "100px !important",
+            }}
+          >
             <Card sx={{ maxWidth: 500 }}>
-              <CardContent>
+              <CardContent
+                sx={{
+                  paddingTop: "80px !important",
+                  paddingBottom: "80px !important",
+                  boxShadow: "1px 2px 10px wheat inset",
+                }}
+                className="login_form"
+              >
                 <Typography variant="h4" sx={{ ml: 5 }} component="div">
                   Welcome to NannyShare
                 </Typography>
@@ -58,25 +72,24 @@ function Login() {
                 <Box sx={{ maxWidth: 400 }}>
                   <form onSubmit={handleSubmit}>
                     <Box>
-                      <Box sx={{ mt: 2 }} item>
+                      <Box sx={{ mt: 2, background: "white" }} item>
                         <TextField
                           fullWidth
                           margin="dense"
                           label="Email"
                           inputRef={emailRef}
                           required
-                          placeholder="Email"
-                          variant="outlined"
+                          variant="filled"
                         />
+
                         <TextField
                           fullWidth
                           margin="dense"
                           label="Password"
                           type="password"
                           inputRef={passwordRef}
-                          placeholder="password"
                           autoComplete="current-password"
-                          variant="outlined"
+                          variant="filled"
                         />
 
                         <Button

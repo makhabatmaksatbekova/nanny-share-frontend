@@ -63,7 +63,7 @@ function UpdateProfile() {
         <Card sx={{ maxWidth: 500, mt: 2 }}>
           <CardContent>
             <Typography variant="h4" component="div">
-              Update Profile
+              Edit account
             </Typography>
             {error && <Alert severity="warning">{error}</Alert>}
             <form onSubmit={handleSubmit}>
@@ -106,7 +106,7 @@ function UpdateProfile() {
                     type="submit"
                     disabled={loading}
                   >
-                    Update
+                    Edit
                   </Button>
                 </Grid>
               </Grid>

@@ -1,8 +1,45 @@
-.content{
-    display: flex;
+.content_card1_image {
+  display: flex;
 }
-.content_image img{
-    border-radius: 15px;
-    width: -webkit-fill-available;
+.content_card1_image img {
+  width: -webkit-fill-available;
+}
+.content_headtag {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.content_headtag_text {
+  font-weight: lighter;
+}
 
+.content_card2_image1 img {
+  width: 25rem;
+  max-width: 100%;
+  height: auto;
+}
+.content_card2_image2 img {
+  width: 25rem;
+  height: auto;
+}
+@media screen and (max-width: 920px) {
+  .content_card2_image2 img {
+    display: none;
+  }
+}
+
+.content_card3_headtag {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+.content_card3_centerText {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.content_card3_cardHeading {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.content_card3_cardText {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
