@@ -9,7 +9,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
@@ -25,18 +24,6 @@ const app = firebase.initializeApp(firebaseConfig);
 const storage = getStorage();
 const currentUser = firebase.auth().currentUser;
 export const auth = app.auth();
-
-//cutom hooks
-// export function useAuth() {
-//   const [currentUser, setCurrentUser] = useState();
-
-//   useEffect(() => {
-//     const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
-//     return unsub;
-//   }, []);
-//   console.log(currentUser, "currentUser");
-//   return currentUser;
-// }
 
 export const db = getFirestore(app);
 // Storage
@@ -55,8 +42,3 @@ export async function upload(file, currentUser, setLoading) {
 }
 
 export default app;
-
-// const app = initializeApp(firebaseConfig);
-// export const auth = getAuth(app);
-// export const db = getFirestore(app);
-// export default app;

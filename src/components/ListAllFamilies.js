@@ -24,9 +24,9 @@ import "./style/ListAllFamilies.css";
 import "./style/ContainerBg.css";
 import useCreateProfile from "./FamilyProfileHooks";
 import ShowSingleProfile from "./ShowSingleProfile";
+import Search from "./Search";
 
 const ListAllFamilies = ({ handleFamilyProfile }) => {
-  const currentUser = firebase.auth().currentUser;
   const [family, setFamily] = useState([]);
   const [toggle, setToggle] = useState(false);
   const { families } = useCreateProfile();
@@ -38,6 +38,7 @@ const ListAllFamilies = ({ handleFamilyProfile }) => {
   return (
     <Box>
       <Header />
+      <Search />
       <Grid container direction="row" justifyContent="center" sx={{ mt: 2 }}>
         <Grid item xs={12} sm={9}>
           <Grid

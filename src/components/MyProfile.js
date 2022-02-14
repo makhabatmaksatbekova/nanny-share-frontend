@@ -54,6 +54,7 @@ const MyProfile = () => {
     };
     getData();
   }, []);
+
   const handleClick = () => {
     setButtonPopup(true);
   };

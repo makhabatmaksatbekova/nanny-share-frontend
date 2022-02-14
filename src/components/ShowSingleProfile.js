@@ -22,7 +22,7 @@ const ShowSingleProfile = ({ singleFamily }) => {
   return (
     <Box className="containerBg" minHeight="100vh">
       <Header />
-      <Grid sx={{ mt: 10 }} maxWidth="50%">
+      <Grid sx={{ mt: 10, padding: "30px" }} maxWidth="50%">
         {family.map((data) => {
           return (
             <Grid
@@ -64,7 +64,8 @@ const ShowSingleProfile = ({ singleFamily }) => {
                     {data.familyName}
                   </Typography>
                 </Divider>
-                <Grid container direction="row" alignItems="center">
+
+                <Grid mt={2} container direction="row" alignItems="center">
                   <Grid item>
                     <LocationOnTwoToneIcon fontSize="small" />
                   </Grid>
@@ -73,7 +74,7 @@ const ShowSingleProfile = ({ singleFamily }) => {
                   </Grid>
                 </Grid>
 
-                <Grid container direction="row" alignItems="center">
+                <Grid mt={1} container direction="row" alignItems="center">
                   <Grid item>
                     <AttachMoneyIcon fontSize="small" />
                   </Grid>
@@ -82,32 +83,41 @@ const ShowSingleProfile = ({ singleFamily }) => {
                   </Grid>
                 </Grid>
 
-                <Typography
-                  component="span"
-                  sx={{ color: "black", fontWeight: "bolder" }}
-                >
-                  Responsibilities:{" "}
-                  <Typography component="span">
-                    {data.responsibilities}
+                <Grid mt={1}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      color: "black",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    Responsibilities:{" "}
+                    <Typography component="span">
+                      {data.responsibilities}
+                    </Typography>
                   </Typography>
-                </Typography>
+                </Grid>
 
-                <Typography component="h6">
-                  <span style={{ color: "black", fontWeight: "bolder" }}>
-                    Your baby age:
-                  </span>{" "}
-                  {data.age} years old
-                </Typography>
-
-                <Typography
-                  component="span"
-                  sx={{ color: "black", fontWeight: "bolder" }}
-                >
-                  About you:
-                  <Typography sx={{ marginLeft: "2px" }} component="span">
-                    {data.about}
+                <Grid mt={1}>
+                  <Typography component="h6">
+                    <span style={{ color: "black", fontWeight: "bolder" }}>
+                      Your baby age:
+                    </span>{" "}
+                    {data.age} years old
                   </Typography>
-                </Typography>
+                </Grid>
+
+                <Grid mt={1}>
+                  <Typography
+                    component="span"
+                    sx={{ color: "black", fontWeight: "bolder" }}
+                  >
+                    About you:
+                    <Typography sx={{ marginLeft: "2px" }} component="span">
+                      {data.about}
+                    </Typography>
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           );

@@ -21,6 +21,7 @@ const useCreateProfile = () => {
   const [docId, setId] = useState("");
   const history = useNavigate();
   const [families, setFamilies] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [delProf, setDeleteMes] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,14 @@ const useCreateProfile = () => {
     };
     getFamilies();
   }, []);
+
+  const searchByZipcode = (zipCode) => {
+    const filtered = families.filter((doc) => {
+      return doc.zip_code === zipCode;
+    });
+    setFiltered(filtered);
+  };
+  console.log("filtered", families);
 
   // Creating family profile
   const handleProfileSubmit = async (event) => {
@@ -42,7 +51,6 @@ const useCreateProfile = () => {
 
   // Updating Family profile // provide docRef id of the current user
   const updateFamilyProfile = (id, data) => {
-    console.log("id");
     const userDoc = doc(db, "families", id);
     // await updateDoc(userDoc, inputs);
   };
@@ -50,12 +58,10 @@ const useCreateProfile = () => {
   // Delete user
   const deleteFamilyProfile = async (id) => {
     const userDoc = doc(db, "families", id);
-    console.log("user", id);
     await deleteDoc(userDoc);
     setDeleteMes(true);
   };
 
-  console.log(delProf, "del");
   const handleInputChange = (event) => {
     event.persist();
     setInputs((inputs) => ({
@@ -72,6 +78,7 @@ const useCreateProfile = () => {
     handleInputChange,
     updateFamilyProfile,
     deleteFamilyProfile,
+    searchByZipcode,
     inputs,
     families,
     delProf,

@@ -11,19 +11,16 @@ import {
   Container,
   TextField,
   Button,
+  InputLabel,
+  Select,
+  MenuItem,
   CardContent,
   Typography,
   Box,
 } from "@mui/material/";
-import SendIcon from "@mui/icons-material/Send";
 
 const NewProfile = () => {
-  const {
-    handleProfileSubmit,
-    handleInputChange,
-    updateFamilyProfile,
-    inputs,
-  } = useCreateProfile();
+  const { handleProfileSubmit, handleInputChange, inputs } = useCreateProfile();
 
   return (
     <Box minHeight="100vh">
@@ -84,33 +81,40 @@ const NewProfile = () => {
                   fullWidth
                   required
                 />
+
                 <TextField
-                  name="address"
-                  label="address (city, state, zip_code)"
+                  name="city"
+                  label="address city"
                   onChange={handleInputChange}
-                  value={inputs.address}
-                  fullWidth
+                  value={inputs.city}
+                  sx={{ width: "23ch" }}
                   required
                   variant="filled"
+                  fullWidth
                 />
-                {/* <TextField
+
+                <TextField
                   name="state"
+                  // select
                   label="state"
                   onChange={handleInputChange}
                   value={inputs.state}
                   fullWidth
                   required
+                  sx={{ width: "22ch" }}
                   variant="filled"
                 />
+
                 <TextField
                   name="zip_code"
                   label="zip_code"
+                  required
                   onChange={handleInputChange}
                   value={inputs.zip_code}
-                  required
-                  variant="filled"
                   fullWidth
-                /> */}
+                  variant="filled"
+                  sx={{ width: "22ch" }}
+                />
                 <TextField
                   name="rate"
                   label="rate"

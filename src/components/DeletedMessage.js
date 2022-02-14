@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const DeletedMessage = () => {
   const { delProf } = useCreateProfile();
-  console.log(delProf);
+  // console.log(delProf);
 
   return delProf ? (
     <div className="popup">

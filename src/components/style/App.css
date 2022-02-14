@@ -12,6 +12,12 @@
 .css-1q39md6-MuiButtonBase-root-MuiButton-root {
   color: #1c2843 !important;
 }
+.css-2fyh96-MuiInputBase-root-MuiFilledInput-root.Mui-focused {
+  background-color: white !important;
+}
+.css-2fyh96-MuiInputBase-root-MuiFilledInput-root:hover {
+  background-color: white !important;
+}
 
 a:-webkit-any-link {
   cursor: pointer;
