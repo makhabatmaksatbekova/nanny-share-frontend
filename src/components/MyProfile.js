@@ -8,7 +8,6 @@ import ProfilePicture from "./ProfilePicture";
 import EditProfile from "./EditProfile";
 import Header from "./Header";
 import Popup from "./Popup";
-import DeletedMessage from "./DeletedMessage";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationOnTwoToneIcon from "@mui/icons-material/LocationOnTwoTone";
@@ -62,8 +61,6 @@ const MyProfile = () => {
   return (
     <Box className="containerBg" minHeight="100vh">
       <Header />
-      <DeletedMessage />
-
       <Grid sx={{ mt: 10 }} maxWidth="50%">
         {family.map((data) => {
           return (

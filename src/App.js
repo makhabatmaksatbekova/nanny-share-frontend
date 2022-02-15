@@ -27,7 +27,7 @@ import {
   collection,
   doc,
   getDocs,
-  getDoc,
+  updateDoc,
   addDoc,
   query,
   where,
@@ -46,6 +46,7 @@ const theme = createTheme({
 function App() {
   const [families, setFamilies] = useState([]);
   const [singleFamily, setSingleFamily] = useState([]);
+  const [serchInput, setSearchInput] = useState("");
   const familiesCollectionRef = collection(db, "families");
 
   useEffect(() => {
@@ -57,11 +58,40 @@ function App() {
     getFamilies();
   }, []);
 
+  // Creating family profile
   const handleFamilyProfile = (id) => {
     const singleFam = families.filter((family) => {
       return family.id === id;
     });
     setSingleFamily(singleFam);
+  };
+
+  // filter data by zip_code
+  const searchByZipcode = (zipCode) => {
+    const filtered = families.filter((doc) => {
+      return doc.zip_code === zipCode;
+    });
+    setFamilies(filtered);
+    setSearchInput("");
+  };
+
+  // Trigger like
+  const handleLike = async (id, liked) => {
+    const filtered = families.map((data) => {
+      if (data.id === id) {
+        data.liked = !data.liked;
+      }
+    });
+    setFamilies(filtered);
+    console.log(families, "families");
+    const userDoc = doc(db, "families", id);
+    const updatedField = { liked: !liked };
+    await updateDoc(userDoc, updatedField);
+  };
+
+  const renderFamilies = () => {
+    console.log("render");
+    setFamilies(families);
   };
 
   return (
@@ -96,7 +126,7 @@ function App() {
                         "linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6))",
                     }}
                   >
-                    <Header />
+                    <Header families={families} handleClick={renderFamilies} />
 
                     <Container maxWidth="lg" className="container">
                       <Content />
@@ -110,7 +140,9 @@ function App() {
               element={
                 <ListAllFamilies
                   families={families}
+                  serchInput={serchInput}
                   handleFamilyProfile={handleFamilyProfile}
+                  searchByZipcode={searchByZipcode}
                 />
               }
             />
@@ -118,7 +150,12 @@ function App() {
             <Route path="/families/new_profile" element={<NewProfile />} />
             <Route
               path="/families/single_profile"
-              element={<ShowSingleProfile singleFamily={singleFamily} />}
+              element={
+                <ShowSingleProfile
+                  singleFamily={singleFamily}
+                  handleLike={handleLike}
+                />
+              }
             />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />

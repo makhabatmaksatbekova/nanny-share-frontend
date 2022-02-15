@@ -21,24 +21,15 @@ const useCreateProfile = () => {
   const [docId, setId] = useState("");
   const history = useNavigate();
   const [families, setFamilies] = useState([]);
-  const [filtered, setFiltered] = useState([]);
   const [delProf, setDeleteMes] = useState(false);
 
-  useEffect(() => {
-    const getFamilies = async () => {
-      const data = await getDocs(familiesCollectionRef);
-      setFamilies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getFamilies();
-  }, []);
-
-  const searchByZipcode = (zipCode) => {
-    const filtered = families.filter((doc) => {
-      return doc.zip_code === zipCode;
-    });
-    setFiltered(filtered);
-  };
-  console.log("filtered", families);
+  // useEffect(() => {
+  //   const getFamilies = async () => {
+  //     const data = await getDocs(familiesCollectionRef);
+  //     setFamilies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   };
+  //   getFamilies();
+  // }, []);
 
   // Creating family profile
   const handleProfileSubmit = async (event) => {
@@ -50,7 +41,7 @@ const useCreateProfile = () => {
   };
 
   // Updating Family profile // provide docRef id of the current user
-  const updateFamilyProfile = (id, data) => {
+  const updateFamilyProfile = async (id, data) => {
     const userDoc = doc(db, "families", id);
     // await updateDoc(userDoc, inputs);
   };
@@ -59,7 +50,6 @@ const useCreateProfile = () => {
   const deleteFamilyProfile = async (id) => {
     const userDoc = doc(db, "families", id);
     await deleteDoc(userDoc);
-    setDeleteMes(true);
   };
 
   const handleInputChange = (event) => {
@@ -70,6 +60,7 @@ const useCreateProfile = () => {
       uid: uid,
       photoURL: photoURL,
       email: email,
+      liked: false,
     }));
   };
 
@@ -78,7 +69,6 @@ const useCreateProfile = () => {
     handleInputChange,
     updateFamilyProfile,
     deleteFamilyProfile,
-    searchByZipcode,
     inputs,
     families,
     delProf,

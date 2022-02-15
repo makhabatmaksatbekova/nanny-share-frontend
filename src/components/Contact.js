@@ -29,9 +29,6 @@ const Contact = () => {
         <Header />
 
         <Box sx={{ display: "flex" }}>
-          <Box sx={{ flex: 3 }}>
-            <img src="https://static.wixstatic.com/media/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.jpeg/v1/fill/w_1259,h_1051,al_c,q_85,usm_0.66_1.00_0.01/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.webp" />
-          </Box>
           <Box
             className="login_box"
             sx={{

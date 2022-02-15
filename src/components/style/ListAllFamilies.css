@@ -31,3 +31,14 @@
   justify-content: center;
   align-items: center;
 }
+.family_list_searchInput input {
+  padding: 10px;
+  outline: none;
+}
+
+.red path {
+  color: red;
+}
+.gray path {
+  color: gray;
+}

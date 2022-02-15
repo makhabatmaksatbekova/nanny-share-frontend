@@ -20,7 +20,7 @@ import PersonIcon from "@mui/icons-material/Person";
 const pages = ["For Families ", "For Nannies"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const Header = () => {
+const Header = ({ handleClick, families }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [error, setError] = useState("");
@@ -53,6 +53,12 @@ const Header = () => {
     }
   };
 
+  const handleClickButton = () => {
+    // handleClick();
+    console.log(families, "families");
+
+    console.log(handleClick, "typeof");
+  };
   return (
     <AppBar className="header_container" position="static">
       <Container maxWidth="xl">
@@ -99,7 +105,9 @@ const Header = () => {
               <MenuItem onClick={handleHeaderButtons}>
                 <Link to="/families">
                   {" "}
-                  <Button variant="text">Families</Button>
+                  <Button variant="text" onClick={() => handleClick()}>
+                    Families
+                  </Button>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleHeaderButtons}>
@@ -123,7 +131,9 @@ const Header = () => {
             <MenuItem onClick={handleHeaderButtons}>
               <Link to="/families">
                 {" "}
-                <Button variant="text">Families</Button>
+                <Button onClick={handleClickButton} variant="text">
+                  Families
+                </Button>
               </Link>
             </MenuItem>
             <MenuItem onClick={handleHeaderButtons}>

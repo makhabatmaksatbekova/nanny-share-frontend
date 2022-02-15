@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocationOnTwoToneIcon from "@mui/icons-material/LocationOnTwoTone";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import Contact from "./Contact";
+import useCreateProfile from "./FamilyProfileHooks";
+import "./style/ShowSingleProfile.css";
 import {
   Card,
   Grid,
@@ -15,13 +20,14 @@ import {
   Box,
 } from "@mui/material/";
 
-const ShowSingleProfile = ({ singleFamily }) => {
-  const family = singleFamily;
-  console.log(singleFamily, "showsingle");
+const ShowSingleProfile = ({ singleFamily, handleLike }) => {
+  const [family, setFamily] = useState(singleFamily);
+  // setFamily(singleFamily);
 
   return (
     <Box className="containerBg" minHeight="100vh">
       <Header />
+
       <Grid sx={{ mt: 10, padding: "30px" }} maxWidth="50%">
         {family.map((data) => {
           return (
@@ -32,6 +38,23 @@ const ShowSingleProfile = ({ singleFamily }) => {
               alignItems="center"
               key={data.id}
             >
+              <Box>
+                {data.liked ? (
+                  <FavoriteIcon
+                    className="red"
+                    onClick={() => {
+                      handleLike(data.id, data.liked);
+                    }}
+                  />
+                ) : (
+                  <FavoriteBorderIcon
+                    className="gray"
+                    onClick={() => {
+                      handleLike(data.id, data.liked);
+                    }}
+                  />
+                )}
+              </Box>
               <Grid
                 item
                 sx={{
@@ -57,7 +80,6 @@ const ShowSingleProfile = ({ singleFamily }) => {
               <Button sx={{ margin: "20px" }} variant="outlined">
                 <Link to={"/families/single_profile/contact"}> CONTACT</Link>
               </Button>
-
               <Grid>
                 <Divider>
                   <Typography sx={{ fontSize: "20px", fontWeight: "medium" }}>
@@ -70,7 +92,9 @@ const ShowSingleProfile = ({ singleFamily }) => {
                     <LocationOnTwoToneIcon fontSize="small" />
                   </Grid>
                   <Grid item sx={{ marginBottom: "2px" }}>
-                    <Typography component="h6">{data.address}</Typography>
+                    <Typography component="h6">
+                      {data.city}, {data.state}, {data.zip_code}
+                    </Typography>
                   </Grid>
                 </Grid>
 
