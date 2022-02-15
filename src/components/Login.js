@@ -7,10 +7,7 @@ import {
   CardContent,
   Alert,
 } from "@mui/material/";
-
 import Typography from "@mui/material/Typography";
-import Header from "./Header";
-
 import Container from "@mui/material/Container";
 import "./style/Signup.css";
 import { useAuth } from "../contexts/AuthContext";
@@ -47,7 +44,10 @@ function Login() {
       <Container maxWidth="xl">
         <Box sx={{ display: "flex" }}>
           <Box sx={{ flex: 3 }}>
-            <img src="https://static.wixstatic.com/media/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.jpeg/v1/fill/w_1259,h_1051,al_c,q_85,usm_0.66_1.00_0.01/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.webp" />
+            <img
+              alt="background pic"
+              src="https://static.wixstatic.com/media/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.jpeg/v1/fill/w_1259,h_1051,al_c,q_85,usm_0.66_1.00_0.01/11062b_26db38db0b28463ca6ef7d0dfc53a437~mv2.webp"
+            />
           </Box>
           <Box
             className="login_box"

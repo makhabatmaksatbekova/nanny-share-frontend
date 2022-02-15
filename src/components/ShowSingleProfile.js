@@ -1,28 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocationOnTwoToneIcon from "@mui/icons-material/LocationOnTwoTone";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
-import Contact from "./Contact";
-import useCreateProfile from "./FamilyProfileHooks";
 import "./style/ShowSingleProfile.css";
-import {
-  Card,
-  Grid,
-  Container,
-  TextField,
-  Button,
-  Divider,
-  Typography,
-  Box,
-} from "@mui/material/";
+import { Grid, Button, Divider, Typography, Box } from "@mui/material/";
 
 const ShowSingleProfile = ({ singleFamily, handleLike }) => {
   const [family, setFamily] = useState(singleFamily);
-  // setFamily(singleFamily);
 
   return (
     <Box className="containerBg" minHeight="100vh">
@@ -38,7 +25,7 @@ const ShowSingleProfile = ({ singleFamily, handleLike }) => {
               alignItems="center"
               key={data.id}
             >
-              <Box>
+              <Grid sx={{ marginRight: "85%" }}>
                 {data.liked ? (
                   <FavoriteIcon
                     className="red"
@@ -54,7 +41,7 @@ const ShowSingleProfile = ({ singleFamily, handleLike }) => {
                     }}
                   />
                 )}
-              </Box>
+              </Grid>
               <Grid
                 item
                 sx={{
@@ -68,8 +55,8 @@ const ShowSingleProfile = ({ singleFamily, handleLike }) => {
               >
                 {data.photoURL && (
                   <img
+                    alt="profile img"
                     style={{
-                      // marginLeft: "-50px",
                       width: "200px",
                       height: "auto",
                     }}
@@ -127,7 +114,7 @@ const ShowSingleProfile = ({ singleFamily, handleLike }) => {
                     <span style={{ color: "black", fontWeight: "bolder" }}>
                       Your baby age:
                     </span>{" "}
-                    {data.age} years old
+                    {data.age}
                   </Typography>
                 </Grid>
 

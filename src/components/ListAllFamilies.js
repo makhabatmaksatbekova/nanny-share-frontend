@@ -1,43 +1,26 @@
 import React from "react";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import NewProfile from "./NewProfile";
 import Header from "./Header";
-import { useState, useEffect } from "react";
-import { db } from "../firebase";
-import {
-  collection,
-  doc,
-  getDocs,
-  getDoc,
-  addDoc,
-  query,
-  where,
-} from "firebase/firestore";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { TextField, Grid, Box, Button } from "@mui/material";
+import { TextField, Grid, Box, Button, Alert } from "@mui/material";
 import "./style/ListAllFamilies.css";
 import "./style/ContainerBg.css";
-import useCreateProfile from "./FamilyProfileHooks";
-import ShowSingleProfile from "./ShowSingleProfile";
-import { NoLuggageOutlined } from "@mui/icons-material";
 
 const ListAllFamilies = ({
   families,
-  searchInput,
   handleFamilyProfile,
   searchByZipcode,
 }) => {
   const [toggle, setToggle] = useState(false);
   const [zipCode, setZipCode] = useState("");
   const [inputValue, setInputValue] = useState("");
+  console.log("families", families);
 
   const handleSearchChange = (e) => {
     setInputValue(e.target.value);
@@ -53,27 +36,31 @@ const ListAllFamilies = ({
     setInputValue("");
   };
   return (
-    <Box>
-      <Box sx={{ borderBottom: "1px solid #1c2843" }}>
+    <Grid minHeight="100vh" className="list_families_container">
+      <Box sx={{ borderBottom: "1px solid #1c2843", backgroundColor: "red" }}>
         <Header />
       </Box>
 
-      <Box sx={{ margin: "20px 0px 0px 20px" }}>
-        <TextField
-          value={inputValue}
-          className="family_list_searchInput"
-          name="zip_code"
-          onChange={handleSearchChange}
-        />
-        <Button
-          onClick={() => {
-            handleInputClear();
+      <Box maxWidth="lg">
+        <Box
+          sx={{
+            margin: "30px 0 0 40%",
           }}
         >
-          search
-        </Button>
-      </Box>
-      <Box>
+          <TextField
+            value={inputValue}
+            className="family_list_searchInput"
+            name="zip_code"
+            onChange={handleSearchChange}
+          />
+          <Button
+            onClick={() => {
+              handleInputClear();
+            }}
+          >
+            search
+          </Button>
+        </Box>
         <Grid container direction="row" justifyContent="center" sx={{ mt: 2 }}>
           <Grid item xs={12} sm={9}>
             <Grid
@@ -83,6 +70,9 @@ const ListAllFamilies = ({
               alignItems="center"
               spacing={{ xs: 1 }}
             >
+              {!families.length && (
+                <Alert severity="info">No families to show</Alert>
+              )}
               {families.map((family) => {
                 return (
                   <Grid
@@ -129,7 +119,13 @@ const ListAllFamilies = ({
                               </Typography>
                               <Typography variant="h6" color="text.secondary">
                                 <LocationOnIcon />
-                                {family.address}
+                                <Box
+                                  component="span"
+                                  sx={{ marginBottom: "5px" }}
+                                >
+                                  {" "}
+                                  {family.city}
+                                </Box>
                               </Typography>
 
                               <Typography
@@ -156,7 +152,7 @@ const ListAllFamilies = ({
           </Grid>
         </Grid>
       </Box>
-    </Box>
+    </Grid>
   );
 };
 

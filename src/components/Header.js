@@ -7,24 +7,19 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import ProfilePicture from "./ProfilePicture";
 import "./style/Header.css";
 import PersonIcon from "@mui/icons-material/Person";
 
-const pages = ["For Families ", "For Nannies"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-const Header = ({ handleClick, families }) => {
+const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   const history = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -53,12 +48,6 @@ const Header = ({ handleClick, families }) => {
     }
   };
 
-  const handleClickButton = () => {
-    // handleClick();
-    console.log(families, "families");
-
-    console.log(handleClick, "typeof");
-  };
   return (
     <AppBar className="header_container" position="static">
       <Container maxWidth="xl">
@@ -104,15 +93,11 @@ const Header = ({ handleClick, families }) => {
             >
               <MenuItem onClick={handleHeaderButtons}>
                 <Link to="/families">
-                  {" "}
-                  <Button variant="text" onClick={() => handleClick()}>
-                    Families
-                  </Button>
+                  <Button variant="text">Families</Button>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleHeaderButtons}>
                 <Link to="/nannies">
-                  {" "}
                   <Button variant="text">Nannies</Button>
                 </Link>
               </MenuItem>
@@ -131,9 +116,7 @@ const Header = ({ handleClick, families }) => {
             <MenuItem onClick={handleHeaderButtons}>
               <Link to="/families">
                 {" "}
-                <Button onClick={handleClickButton} variant="text">
-                  Families
-                </Button>
+                <Button variant="text">Families</Button>
               </Link>
             </MenuItem>
             <MenuItem onClick={handleHeaderButtons}>

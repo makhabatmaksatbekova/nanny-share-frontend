@@ -2,7 +2,9 @@
   margin: 0 auto;
   color: #1c2843;
 }
-
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #f6f6f6 !important;
+}
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
   color: #1c2843 !important;
 }

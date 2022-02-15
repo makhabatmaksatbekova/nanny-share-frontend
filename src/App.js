@@ -68,19 +68,20 @@ function App() {
 
   // filter data by zip_code
   const searchByZipcode = (zipCode) => {
-    const filtered = families.filter((doc) => {
+    const updated = families.filter((doc) => {
       return doc.zip_code === zipCode;
     });
-    setFamilies(filtered);
+    setFamilies(updated);
     setSearchInput("");
   };
 
   // Trigger like
   const handleLike = async (id, liked) => {
-    const filtered = families.map((data) => {
-      if (data.id === id) {
-        data.liked = !data.liked;
+    const filtered = families.map((singleFamily) => {
+      if (singleFamily.id === id) {
+        singleFamily.liked = !singleFamily.liked;
       }
+      return singleFamily;
     });
     setFamilies(filtered);
     console.log(families, "families");
@@ -126,7 +127,7 @@ function App() {
                         "linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6))",
                     }}
                   >
-                    <Header families={families} handleClick={renderFamilies} />
+                    <Header />
 
                     <Container maxWidth="lg" className="container">
                       <Content />

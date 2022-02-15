@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import {
@@ -9,10 +9,8 @@ import {
   CardContent,
   Alert,
 } from "@mui/material/";
-
 import Typography from "@mui/material/Typography";
 import Header from "./Header";
-
 import Container from "@mui/material/Container";
 import "./style/Signup.css";
 import "./style/Contact.css";

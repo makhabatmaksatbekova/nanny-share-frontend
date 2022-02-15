@@ -1,47 +1,28 @@
-import React, { useRef, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
 import useCreateProfile from "./FamilyProfileHooks";
 import ProfilePicture from "./ProfilePicture";
-import SendIcon from "@mui/icons-material/Send";
 import Header from "./Header";
 import "./style/EditProfile.css";
-import {
-  Card,
-  Grid,
-  Container,
-  TextField,
-  Button,
-  CardContent,
-  Typography,
-  Box,
-} from "@mui/material/";
+import { Grid, TextField, Button, Typography, Box } from "@mui/material/";
 import { db } from "../firebase";
 import {
   collection,
   doc,
+  updateDoc,
   getDocs,
-  addDoc,
   query,
   where,
 } from "firebase/firestore";
 
 const EditProfile = () => {
-  const {
-    handleProfileSubmit,
-    handleInputChange,
-    updateFamilyProfile,
-    inputs,
-  } = useCreateProfile();
+  const [family, setFamily] = useState([]);
+  const [updatedInput, setUpdatedInputs] = useState({});
 
+  //query family with given id
   const currentUser = firebase.auth().currentUser;
   const familiesCollectionRef = collection(db, "families");
-  const [family, setFamily] = useState([]);
-  const [updatedInput, setUpdate] = useState([]);
-
   const q = query(familiesCollectionRef, where("uid", "==", currentUser.uid));
 
   useEffect(() => {
@@ -54,14 +35,30 @@ const EditProfile = () => {
     getData();
   }, []);
 
-  const update = () => {
-    console.log("update");
+  console.log("family", family);
+  const handleUpdatedInput = (event) => {
+    event.persist();
+    setUpdatedInputs((updatedInput) => ({
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  console.log("updated input", updatedInput);
+  // Updating family profile
+  const updateFamilyProfile = async (event, id) => {
+    if (event) {
+      event.preventDefault();
+    }
+    const userDoc = doc(db, "families", id);
+    console.log("id", id);
+    await updateDoc(userDoc, updatedInput);
   };
 
   return (
     <Box minHeight="100vh">
       <Header />
       {family.map((data) => {
+        console.log(data.id, "data_id");
         return (
           <Grid
             key={data.id}
@@ -90,7 +87,12 @@ const EditProfile = () => {
                 background: "white",
               }}
             >
-              <Box component="form" onSubmit={update}>
+              <Box
+                component="form"
+                onSubmit={(e) => {
+                  updateFamilyProfile(e, data.id);
+                }}
+              >
                 <Grid
                   container
                   direction="column"
@@ -120,27 +122,55 @@ const EditProfile = () => {
                     <TextField
                       name="familyName"
                       label="Family name"
-                      // onChange={handleInputChange}
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.familyName}
                       defaultValue={data.familyName}
                       variant="filled"
                       fullWidth
                       required
                     />
+
                     <TextField
-                      name="address"
-                      label="address"
-                      // onChange={handleInputChange}
-                      defaultValue={data.address}
+                      name="city"
+                      label="city"
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.city}
+                      defaultValue={data.city}
+                      sx={{ width: "23ch" }}
+                      required
+                      variant="filled"
+                      fullWidth
+                    />
+
+                    <TextField
+                      name="state"
+                      label="state"
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.state}
+                      defaultValue={data.state}
                       fullWidth
                       required
+                      sx={{ width: "22ch" }}
                       variant="filled"
                     />
 
                     <TextField
+                      name="zip_code"
+                      label="zip_code"
+                      required
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.zip_code}
+                      defaultValue={data.zip_code}
+                      fullWidth
+                      variant="filled"
+                      sx={{ width: "22ch" }}
+                    />
+                    <TextField
                       name="rate"
                       label="rate"
                       fullWidth
-                      // onChange={handleInputChange}
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.rate}
                       variant="filled"
                       defaultValue={data.rate}
                       required
@@ -149,7 +179,8 @@ const EditProfile = () => {
                       name="age"
                       label="age"
                       type="text"
-                      // onChange={handleInputChange}
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.age}
                       defaultValue={data.age}
                       variant="filled"
                       fullWidth
@@ -157,11 +188,12 @@ const EditProfile = () => {
                     />
                     <TextField
                       label="Responsibilities"
-                      // name="responsibilities"
+                      name="responsibilities"
                       variant="filled"
                       multiline
                       rows={4}
-                      // onChange={handleInputChange}
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.responsibilities}
                       fullWidth
                       defaultValue={data.responsibilities}
                     />
@@ -172,7 +204,8 @@ const EditProfile = () => {
                       multiline
                       rows={4}
                       fullWidth
-                      // onChange={handleInputChange}
+                      onChange={handleUpdatedInput}
+                      value={updatedInput.about}
                       defaultValue={data.about}
                       variant="filled"
                       required
@@ -182,7 +215,6 @@ const EditProfile = () => {
                       fullWidth
                       variant="contained"
                       type="submit"
-                      // onClick={update}
                     >
                       Save
                     </Button>

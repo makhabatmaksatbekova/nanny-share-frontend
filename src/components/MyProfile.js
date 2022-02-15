@@ -1,40 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useCreateProfile from "./FamilyProfileHooks";
-import ProfilePicture from "./ProfilePicture";
-import EditProfile from "./EditProfile";
 import Header from "./Header";
 import Popup from "./Popup";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocationOnTwoToneIcon from "@mui/icons-material/LocationOnTwoTone";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SendIcon from "@mui/icons-material/Send";
-import EditIcon from "@mui/icons-material/Edit";
-import {
-  Card,
-  Grid,
-  Container,
-  TextField,
-  Button,
-  Divider,
-  Typography,
-  Box,
-} from "@mui/material/";
-
+import { Grid, Button, Divider, Typography, Box } from "@mui/material/";
 import { db } from "../firebase";
-import {
-  collection,
-  doc,
-  getDocs,
-  addDoc,
-  where,
-  query,
-} from "firebase/firestore";
-import AvatarEditor from "react-avatar-editor";
+import { collection, getDocs, where, query } from "firebase/firestore";
 
 const MyProfile = () => {
   const { deleteFamilyProfile, delProf } = useCreateProfile();
@@ -63,13 +38,14 @@ const MyProfile = () => {
       <Header />
       <Grid sx={{ mt: 10 }} maxWidth="50%">
         {family.map((data) => {
+          console.log(data, "data");
           return (
             <Grid
               container
               direction="column"
               justifyContent="center"
               alignItems="center"
-              sx={{ paddingTop: "15px" }}
+              sx={{ padding: "20px" }}
               key={data.id}
             >
               {" "}
@@ -112,7 +88,9 @@ const MyProfile = () => {
                     <LocationOnTwoToneIcon fontSize="small" />
                   </Grid>
                   <Grid item sx={{ marginBottom: "2px" }}>
-                    <Typography component="h6">{data.address}</Typography>
+                    <Typography component="h6">
+                      {data.city}, {data.state}, {data.zip_code}
+                    </Typography>
                   </Grid>
                 </Grid>
 

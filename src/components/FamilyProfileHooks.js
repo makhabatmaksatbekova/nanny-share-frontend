@@ -18,7 +18,6 @@ const useCreateProfile = () => {
   const email = firebase.auth().currentUser.email;
   const familiesCollectionRef = collection(db, "families");
   const [inputs, setInputs] = useState({});
-  const [docId, setId] = useState("");
   const history = useNavigate();
   const [families, setFamilies] = useState([]);
   const [delProf, setDeleteMes] = useState(false);
