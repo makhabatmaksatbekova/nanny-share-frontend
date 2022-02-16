@@ -12,7 +12,6 @@ import { db } from "../firebase";
 import { collection, getDocs, where, query } from "firebase/firestore";
 
 const MyProfile = () => {
-  const { deleteFamilyProfile, delProf } = useCreateProfile();
   const currentUser = firebase.auth().currentUser;
   const familiesCollectionRef = collection(db, "families");
   const [family, setFamily] = useState([]);
@@ -38,7 +37,7 @@ const MyProfile = () => {
       <Header />
       <Grid sx={{ mt: 10 }} maxWidth="50%">
         {family.map((data) => {
-          console.log(data, "data");
+          console.log(data.photoURL);
           return (
             <Grid
               container

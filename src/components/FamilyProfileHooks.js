@@ -6,11 +6,10 @@ import {
   collection,
   doc,
   addDoc,
-  getDocs,
-  updateDoc,
   deleteDoc,
+  getDocs,
 } from "firebase/firestore";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const useCreateProfile = () => {
   const uid = firebase.auth().currentUser.uid;
@@ -19,16 +18,16 @@ const useCreateProfile = () => {
   const familiesCollectionRef = collection(db, "families");
   const [inputs, setInputs] = useState({});
   const history = useNavigate();
+  const [profileCreated, setProfileCreated] = useState(false);
   const [families, setFamilies] = useState([]);
-  const [delProf, setDeleteMes] = useState(false);
 
-  // useEffect(() => {
-  //   const getFamilies = async () => {
-  //     const data = await getDocs(familiesCollectionRef);
-  //     setFamilies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
-  //   getFamilies();
-  // }, []);
+  useEffect(() => {
+    const getFamilies = async () => {
+      const data = await getDocs(familiesCollectionRef);
+      setFamilies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getFamilies();
+  }, []);
 
   // Creating family profile
   const handleProfileSubmit = async (event) => {
@@ -37,12 +36,7 @@ const useCreateProfile = () => {
     }
     history("/families");
     const docRef = await addDoc(familiesCollectionRef, inputs);
-  };
-
-  // Updating Family profile // provide docRef id of the current user
-  const updateFamilyProfile = async (id, data) => {
-    const userDoc = doc(db, "families", id);
-    // await updateDoc(userDoc, inputs);
+    setProfileCreated(true);
   };
 
   // Delete user
@@ -66,11 +60,10 @@ const useCreateProfile = () => {
   return {
     handleProfileSubmit,
     handleInputChange,
-    updateFamilyProfile,
     deleteFamilyProfile,
     inputs,
     families,
-    delProf,
+    profileCreated,
   };
 };
 export default useCreateProfile;

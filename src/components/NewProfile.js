@@ -1,23 +1,10 @@
-import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+
 import useCreateProfile from "./FamilyProfileHooks";
 import ProfilePicture from "./ProfilePicture";
 import Header from "./Header";
 import "./style/NewProfile.css";
-import {
-  Card,
-  Grid,
-  Container,
-  TextField,
-  Button,
-  InputLabel,
-  Select,
-  MenuItem,
-  CardContent,
-  Typography,
-  Box,
-} from "@mui/material/";
+import { Grid, TextField, Button, Typography, Box } from "@mui/material/";
 
 const NewProfile = () => {
   const { handleProfileSubmit, handleInputChange, inputs } = useCreateProfile();

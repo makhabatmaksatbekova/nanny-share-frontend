@@ -35,7 +35,6 @@ const EditProfile = () => {
     getData();
   }, []);
 
-  console.log("family", family);
   const handleUpdatedInput = (event) => {
     event.persist();
     setUpdatedInputs((updatedInput) => ({
@@ -43,7 +42,6 @@ const EditProfile = () => {
     }));
   };
 
-  console.log("updated input", updatedInput);
   // Updating family profile
   const updateFamilyProfile = async (event, id) => {
     if (event) {
@@ -58,7 +56,6 @@ const EditProfile = () => {
     <Box minHeight="100vh">
       <Header />
       {family.map((data) => {
-        console.log(data.id, "data_id");
         return (
           <Grid
             key={data.id}

@@ -29,6 +29,11 @@ function Content() {
             Split the cost of a nanny and enjoy flexible child care with a nanny
             share.
           </Box>
+          <Link to="/families">
+            <Button sx={{ margin: "20px" }} variant="outlined">
+              search nanny share
+            </Button>
+          </Link>
         </Grid>
         <Grid className="content_card1_image" item xs={12} md={6}>
           <img src="https://images.saymedia-content.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:eco%2Cw_620/MTc0NTEzOTE3ODE5NzU4NTM3/how-to-pack-the-perfect-nanny-bag.jpg" />

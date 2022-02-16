@@ -8,19 +8,23 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+
 import { TextField, Grid, Box, Button, Alert } from "@mui/material";
 import "./style/ListAllFamilies.css";
 import "./style/ContainerBg.css";
+import useCreateProfile from "./FamilyProfileHooks";
 
 const ListAllFamilies = ({
   families,
+  searchResult,
   handleFamilyProfile,
   searchByZipcode,
+  handleReset,
 }) => {
   const [toggle, setToggle] = useState(false);
   const [zipCode, setZipCode] = useState("");
   const [inputValue, setInputValue] = useState("");
-  console.log("families", families);
+  const { profileCreated } = useCreateProfile();
 
   const handleSearchChange = (e) => {
     setInputValue(e.target.value);
@@ -40,6 +44,12 @@ const ListAllFamilies = ({
       <Box sx={{ borderBottom: "1px solid #1c2843", backgroundColor: "red" }}>
         <Header />
       </Box>
+      <Box>
+        <Typography sx={{ margin: "20px" }} variant="h5" align="center">
+          {" "}
+          Families ready for nanny share{" "}
+        </Typography>
+      </Box>
 
       <Box maxWidth="lg">
         <Box
@@ -53,6 +63,7 @@ const ListAllFamilies = ({
             name="zip_code"
             onChange={handleSearchChange}
           />
+
           <Button
             onClick={() => {
               handleInputClear();
@@ -60,6 +71,14 @@ const ListAllFamilies = ({
           >
             search
           </Button>
+          {searchResult ? <Button onClick={handleReset}>reset</Button> : null}
+        </Box>
+        <Box>
+          {searchResult ? (
+            <Typography sx={{ margin: "20px" }} variant="h5" align="center">
+              Search results for {zipCode}
+            </Typography>
+          ) : null}
         </Box>
         <Grid container direction="row" justifyContent="center" sx={{ mt: 2 }}>
           <Grid item xs={12} sm={9}>
@@ -147,7 +166,9 @@ const ListAllFamilies = ({
           </Grid>
           <Grid item xs={12} sm={2}>
             <Link to="/families/new_profile">
-              <Button variant="outlined">Create profile</Button>
+              {profileCreated ? null : (
+                <Button variant="outlined">Create profile</Button>
+              )}
             </Link>
           </Grid>
         </Grid>

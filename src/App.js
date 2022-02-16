@@ -45,8 +45,10 @@ const theme = createTheme({
 
 function App() {
   const [families, setFamilies] = useState([]);
+  const [familiesCopy, setFamiliesCopy] = useState([]);
   const [singleFamily, setSingleFamily] = useState([]);
   const [serchInput, setSearchInput] = useState("");
+  const [searchResult, setSearchResult] = useState(false);
   const familiesCollectionRef = collection(db, "families");
 
   useEffect(() => {
@@ -71,8 +73,10 @@ function App() {
     const updated = families.filter((doc) => {
       return doc.zip_code === zipCode;
     });
+    setFamiliesCopy(families);
     setFamilies(updated);
     setSearchInput("");
+    setSearchResult(true);
   };
 
   // Trigger like
@@ -84,15 +88,14 @@ function App() {
       return singleFamily;
     });
     setFamilies(filtered);
-    console.log(families, "families");
     const userDoc = doc(db, "families", id);
     const updatedField = { liked: !liked };
     await updateDoc(userDoc, updatedField);
   };
 
-  const renderFamilies = () => {
-    console.log("render");
-    setFamilies(families);
+  const handleReset = () => {
+    setFamilies(familiesCopy);
+    setSearchResult(false);
   };
 
   return (
@@ -142,6 +145,8 @@ function App() {
                 <ListAllFamilies
                   families={families}
                   serchInput={serchInput}
+                  searchResult={searchResult}
+                  handleReset={handleReset}
                   handleFamilyProfile={handleFamilyProfile}
                   searchByZipcode={searchByZipcode}
                 />
